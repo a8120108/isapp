@@ -11,11 +11,14 @@
 
     <script>
         function button1Pressed() {
-            doSelect();
+            searching();
         }
 
-        async function doSelect() {
-            var sql = 'select * from Tweets order by time desc limit 20';
+        async function searching() {
+            var search = document.getElementById('search').value
+
+            var sql = `select * from Tweets where tweet like "%${search}%";`
+
             var objects = await osql.connect(sql);
             console.log(objects);
             var html = '';
@@ -33,9 +36,11 @@
 
 <body>
     <h1>Tweets</h1>
-    <button onclick="button1Pressed()">X</button>
     <hr>
-    <p id="result">xxxx</p>
+    <p>🔍<input id="search" type="textfield">
+        <button onclick="button1Pressed()">検索</button>
+    </p>
+    <p id="result"></p>
 </body>
 
 </html>
