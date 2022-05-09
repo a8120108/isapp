@@ -10,6 +10,9 @@
     <script type="text/javascript" src="../osql.js"></script>
 
     <script>
+        $().ready(function () {
+            doselect();
+        });
         function button1Pressed() {
             doInsert();
         }
@@ -34,6 +37,21 @@
             }
             html = html + '</ul>';
             document.getElementById('result').innerHTML = "tweetしました" + html;
+        }
+
+        async function doselect() {
+            var sql = 'select * from Tweets order by time desc limit 20';
+
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            var html = '';
+            html = html + '<ul>';
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                html = html + '<li>' + object.tweet + ',' + object.name + ',' + object.time + '</li>';
+            }
+            html = html + '</ul>';
+            document.getElementById('result').innerHTML = html;
         }
     </script>
 
