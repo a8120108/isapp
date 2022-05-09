@@ -10,6 +10,13 @@
     <script type="text/javascript" src="../osql.js"></script>
 
     <script>
+        var x;
+
+        $().ready(function () {
+            x = 0;
+            setInterval(doselect, 2000);
+        });
+
         function button1Pressed() {
             doInsert();
         }
@@ -28,6 +35,7 @@
         }
 
         async function doselect() {
+            x++;
             var sql = 'select * from Tweets order by time desc limit 20';
 
             var objects = await osql.connect(sql);
