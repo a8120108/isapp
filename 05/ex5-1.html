@@ -17,7 +17,7 @@
         async function searching() {
             var search = document.getElementById('search').value
 
-            var sql = `select * from Tweets where tweet like "%${search}%";`
+            var sql = `select * from Tweets where tweet like "%${search}%" order by time desc;`
 
             var objects = await osql.connect(sql);
             console.log(objects);
