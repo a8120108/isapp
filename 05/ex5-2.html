@@ -40,7 +40,8 @@
 
         async function doselect() {
             x++;
-            var sql = 'select * from Tweets order by time desc limit 20';
+            var search = document.getElementById('search').value
+            var sql = `select * from Tweets where tweet like "%${search}%" order by time desc;`
 
             var objects = await osql.connect(sql);
             console.log(objects);
@@ -62,7 +63,7 @@
         async function searching() {
             var search = document.getElementById('search').value
 
-            var sql = `select * from Tweets where tweet like "%${search}%";`
+            var sql = `select * from Tweets where tweet like "%${search}%" order by time desc;`
 
             var objects = await osql.connect(sql);
             console.log(objects);
