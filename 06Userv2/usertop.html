@@ -15,7 +15,9 @@
         });
         function name() {
             var name = sessionStorage.getItem("username");
+            var id = sessionStorage.getItem("userid")
             document.getElementById("welcome").innerHTML = "ようこそ" + name + "さん";
+            document.getElementById("change").href = `update.html?userid=${id}`
         }
     </script>
 
@@ -25,6 +27,7 @@
     <h1>ユーザトップ</h1>
     <p id="welcome"></p>
     <hr>
+    <a href id="change">ユーザー情報変更</a>
 
 </body>
 
