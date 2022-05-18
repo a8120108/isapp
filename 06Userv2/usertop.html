@@ -18,6 +18,7 @@
             var id = sessionStorage.getItem("userid")
             document.getElementById("welcome").innerHTML = "ようこそ" + name + "さん";
             document.getElementById("change").href = `update.html?userid=${id}`
+            document.getElementById("Tweet").href = `Tweet.html?userid=${id}`
         }
     </script>
 
@@ -27,7 +28,9 @@
     <h1>ユーザトップ</h1>
     <p id="welcome"></p>
     <hr>
-    <a href id="change">ユーザー情報変更</a>
+    <a href id="change">ユーザー情報変更</a><br>
+    <a href id="Tweet">Twitter</a>
+
 
 </body>
 

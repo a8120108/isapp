@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../settings.js"></script>
+    <script type="text/javascript" src="../osql.js"></script>
+
+    <script>
+        $().ready(function () {
+            appear();
+            name()
+        });
+
+        async function name() {
+            var name = sessionStorage.getItem("username");
+            document.getElementById("welcome").innerHTML = "ようこそ" + name + "さん";
+            document.getElementById("name").value = name;
+            var id = document.getElementById("id")
+            document.getElementById("top").href = `usertop.html?userid=${id}`
+
+        }
+        async function buttonPressed() {
+            var name = sessionStorage.getItem("username");
+            var Tweet = document.getElementById("prop").value;
+            var sql = `insert into Tweets (name, tweet, time) values("${name}","${Tweet}",now())`;
+            var objects = await osql.connect(sql);
+            appear();
+        }
+        async function appear() {
+            var sql = 'select * from Tweets order by time desc limit 30';
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            var html = '';
+            html = html + '<table border="1">';
+            html = html + '<td>' + "name";
+            html = html + "</td>";
+            html = html + '</td>';
+            html = html + '<td>' + "Tweet";
+            html = html + '</td>';
+            html = html + '<td>' + "Time";
+            html = html + '</td>';
+            for (var i = 0; i < objects.length; i++) {
+                html = html + '<tr>';
+                var object = objects[i];
+                html = html + '<td>' + object.name + '</td>';
+                html = html + '<td>' + object.tweet + '</td>';
+                html = html + '<td>' + object.time + '</td>';
+                html = html + '</tr>';
+            }
+            html = html + '</table>';
+            document.getElementById('result').innerHTML = html;
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>Twitter</h1>
+    <p id="welcome"></p>
+    <a href id="top">ユーザートップに戻る</a>
+    <hr>
+    <p>　　　　ID:<input id="name" disabled></p>
+    <p>Tweet内容:<input id="prop" type="textfield"><button onclick="buttonPressed()">Tweet</button></p>
+    <p id="result">xxxx</p>
+
+</body>
+
+</html>
