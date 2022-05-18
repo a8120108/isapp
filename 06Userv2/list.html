@@ -39,12 +39,12 @@
 
         }
         async function buttonPressed2(i) {
-            var useid = sessionStorage.getItem(`object.userid[${i}]`)
+            var sql = 'select * from Users';
+            var objects = await osql.connect(sql);
             var ans = window.confirm('本当にいいんですね？');
             if (ans == true) {
-                //var sql = `select * from Users where id = "${useid}";`
-                //await osql.connect(sql);
-                window.confirm(sessionStorage.getItem("userid"))
+                var sql = `delete from Users where id = "${objects[i].id}";`
+                await osql.connect(sql);
             }
         }
     </script>
