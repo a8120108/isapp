@@ -17,10 +17,12 @@
 
         async function name() {
             var name = sessionStorage.getItem("username");
+            var id = sessionStorage.getItem("userid")
             document.getElementById("welcome").innerHTML = "ようこそ" + name + "さん";
             document.getElementById("name").value = name;
             var id = document.getElementById("id")
             document.getElementById("top").href = `usertop.html?userid=${id}`
+            document.getElementById("follow").href = `Follow.html?userid=${id}`
 
         }
         async function buttonPressed() {
@@ -61,7 +63,8 @@
 <body>
     <h1>Twitter</h1>
     <p id="welcome"></p>
-    <a href id="top">ユーザートップに戻る</a>
+    <a href id="top">ユーザートップに戻る</a><br>
+    <a href id="follow">フォロー</a><br>
     <hr>
     <p>　　　　ID:<input id="name" disabled></p>
     <p>Tweet内容:<input id="prop" type="textfield"><button onclick="buttonPressed()">Tweet</button></p>
